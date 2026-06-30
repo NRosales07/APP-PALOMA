@@ -4,13 +4,14 @@
   funcione instalado y sin conexión, como un regalo que vive en su teléfono.
 */
 
-const CACHE_NAME = "cantares-6-9-v4";
+const CACHE_NAME = "cantares-6-9-v5";
 
 const ARCHIVOS_CORE = [
   "./",
   "./index.html",
   "./manifest.json",
   "./Cara.mp3",
+  "./CaraInstrumental.mp3",
   "./icons/icon-72.png",
   "./icons/icon-96.png",
   "./icons/icon-128.png",

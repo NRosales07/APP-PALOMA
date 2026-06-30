@@ -690,7 +690,7 @@ footer .footer-heart{color:var(--color-primary-light);font-size:1rem;display:blo
 <canvas id="starCanvas" aria-hidden="true"></canvas>
 
 <!-- MÚSICA -->
-<audio id="musica" loop>
+<audio id="musica">
     <source src="Cara.mp3" type="audio/mpeg">
 </audio>
 
@@ -899,12 +899,12 @@ function activarAuroras(){
     let W, H, t = 0;
 
     const planetas = [
-        { id:"historia",  label:"🌹 Nuestra Historia",  emoji:"🌹", color:"#ffd166", glow:"rgba(255,209,102,0.55)", x:.22, y:.40, r:26, presion:0 },
-        { id:"messier",   label:"🔭 Mi Catálogo",       emoji:"🔭", color:"#c9986a", glow:"rgba(201,152,106,0.5)",  x:.78, y:.38, r:22, presion:0 },
-        { id:"carta",     label:"💌 Carta para Ti",     emoji:"💌", color:"#a78bfa", glow:"rgba(167,139,250,0.5)",  x:.28, y:.62, r:30, presion:0 },
-        { id:"idonea",    label:"💞 Mi Idónea",         emoji:"💞", color:"#ff7aa2", glow:"rgba(255,122,162,0.5)",  x:.72, y:.60, r:24, presion:0 },
-        { id:"secreto",   label:"🔒 Un Secreto",        emoji:"🔒", color:"#5dcaa5", glow:"rgba(93,202,165,0.5)",   x:.50, y:.76, r:20, presion:0 },
-        { id:"recuerdos", label:"📸 Recuerdos",         emoji:"📸", color:"#60a5fa", glow:"rgba(96,165,250,0.45)",  x:.50, y:.90, r:22, presion:0 },
+        { id:"historia",  label:"🌹 Nuestra Historia",  emoji:"🌹", color:"#ffd166", glow:"rgba(255,209,102,0.55)", x:.22, y:.49, r:22, presion:0 },
+        { id:"messier",   label:"🔭 Mi Catálogo",       emoji:"🔭", color:"#c9986a", glow:"rgba(201,152,106,0.5)",  x:.78, y:.47, r:19, presion:0 },
+        { id:"carta",     label:"💌 Carta para Ti",     emoji:"💌", color:"#a78bfa", glow:"rgba(167,139,250,0.5)",  x:.28, y:.66, r:25, presion:0 },
+        { id:"idonea",    label:"💞 Mi Idónea",         emoji:"💞", color:"#ff7aa2", glow:"rgba(255,122,162,0.5)",  x:.72, y:.64, r:20, presion:0 },
+        { id:"secreto",   label:"🔒 Un Secreto",        emoji:"🔒", color:"#5dcaa5", glow:"rgba(93,202,165,0.5)",   x:.50, y:.76, r:17, presion:0 },
+        { id:"recuerdos", label:"📸 Recuerdos",         emoji:"📸", color:"#60a5fa", glow:"rgba(96,165,250,0.45)",  x:.50, y:.90, r:19, presion:0 },
     ];
 
     function resize(){
@@ -1044,6 +1044,27 @@ const musica = document.getElementById("musica");
 const musicToggle = document.getElementById("musicToggle");
 let musicaIniciada = false;
 
+/* ============ PISTA CON VOZ / INSTRUMENTAL ============ */
+const PISTA_VOZ = "Cara.mp3";
+const PISTA_INSTRUMENTAL = "Carainstrumental.mp3";
+let modoVoz = true; // empieza sonando la alabanza con voz
+
+// Cuando la pista actual termina de forma natural:
+// - si era la versión con voz, pasa a la instrumental (en loop, de fondo)
+// - la instrumental no debería terminar nunca (queda en loop), pero por si acaso, la reinicia
+musica.addEventListener("ended", () => {
+    if (modoVoz){
+        modoVoz = false;
+        musica.src = PISTA_INSTRUMENTAL;
+        musica.loop = true;
+        musica.currentTime = 0;
+        musica.play().catch(()=>{});
+    } else {
+        musica.currentTime = 0;
+        musica.play().catch(()=>{});
+    }
+});
+
 function iniciarMusica(){
     musica.play().catch(()=>{});
     musicToggle.classList.add("visible","is-playing");
@@ -1090,6 +1111,7 @@ let momentoRafId = null;
 
 function vigilarMomentoCancion(){
     musica.addEventListener("timeupdate", () => {
+        if (!modoVoz) return; // la letra solo tiene sentido con la versión con voz
         const t = musica.currentTime;
         if (!momentoTerminado && !momentoActivado && t >= MOMENTO_INICIO && t <= MOMENTO_FIN){
             activarMomento();
@@ -1181,6 +1203,7 @@ const m2Linea4    = document.getElementById("m2Linea4");
 const m2Linea5    = document.getElementById("m2Linea5");
 
 musica.addEventListener("timeupdate", () => {
+    if (!modoVoz) return; // la letra solo tiene sentido con la versión con voz
     const ct = musica.currentTime;
     if (!momento2Terminado && !momento2Activado && ct >= MOMENTO2_INICIO && ct <= MOMENTO2_FIN){
         activarMomento2();
@@ -1700,11 +1723,14 @@ const bfEmoji = document.getElementById("bfEmoji");
 const bfLinea3 = document.getElementById("bfLinea3");
 const bfCorazon = document.getElementById("bfCorazon");
 
-/* Transición suave de la alabanza: baja el volumen, salta al segundo indicado y vuelve a subir */
-function transicionMusicaASegundo(segundoDestino, duracionBajada = 1600, duracionSubida = 2200){
+/* Transición dramática: baja el volumen de lo que esté sonando (voz o instrumental),
+   y al llegar al silencio, deja lista la alabanza CON VOZ en el segundo indicado.
+   Cuando ya está lista (en silencio, posicionada), ejecuta alListo() —ahí es donde
+   conviene empezar a mostrar el texto— y luego sube el volumen poco a poco. */
+function fundirYEntrarConVoz(segundoDestino, alListo, duracionBajada = 2200, duracionSubida = 3000){
     if (!musica) return;
     const volumenOriginal = musica.volume || 1;
-    const pasosBajada = 24;
+    const pasosBajada = 28;
     let paso = 0;
     if (window.__fadeBajadaInterval) clearInterval(window.__fadeBajadaInterval);
     if (window.__fadeSubidaInterval) clearInterval(window.__fadeSubidaInterval);
@@ -1714,10 +1740,20 @@ function transicionMusicaASegundo(segundoDestino, duracionBajada = 1600, duracio
         musica.volume = Math.max(0, volumenOriginal * (1 - paso / pasosBajada));
         if (paso >= pasosBajada){
             clearInterval(window.__fadeBajadaInterval);
+
+            // Asegura que sea la versión con voz la que suene en este momento
+            const yaEraVoz = modoVoz;
+            modoVoz = true;
+            musica.loop = false;
+            if (!yaEraVoz) musica.src = PISTA_VOZ;
             musica.currentTime = segundoDestino;
             musica.volume = 0;
+            musica.play().catch(()=>{});
+
+            if (typeof alListo === "function") alListo();
+
             let pasoSubida = 0;
-            const pasosSubida = 30;
+            const pasosSubida = 36;
             window.__fadeSubidaInterval = setInterval(() => {
                 pasoSubida++;
                 musica.volume = Math.min(volumenOriginal, volumenOriginal * (pasoSubida / pasosSubida));
@@ -1732,14 +1768,24 @@ function transicionMusicaASegundo(segundoDestino, duracionBajada = 1600, duracio
 
 function mostrarBesoFinal(){
     besoFinalDiv.classList.add("activo");
-    // Justo cuando la pantalla se desvanece para mostrar la indirecta del beso,
-    // la alabanza baja suavemente y vuelve a sonar desde el segundo 216, subiendo de volumen.
-    transicionMusicaASegundo(216);
-    setTimeout(()=>bfLinea1.classList.add("visible"), 500);
-    setTimeout(()=>bfLinea2.classList.add("visible"), 1900);
-    setTimeout(()=>bfEmoji.classList.add("visible"), 3200);
-    setTimeout(()=>bfLinea3.classList.add("visible"), 4000);
-    setTimeout(()=>bfCorazon.classList.add("visible"), 5200);
+
+    // Evita que aparezca también el overlay genérico de letra del segundo 216,
+    // ya que este momento tiene su propio texto dedicado.
+    momento2Terminado = true;
+    if (momento2Div.classList.contains("activo")) cerrarMomento2();
+
+    // Fundido dramático: la pantalla ya se puso negra (besoFinalDiv.activo),
+    // baja el volumen de lo que esté sonando, y justo cuando empieza a
+    // aparecer la frase, entra de nuevo la alabanza con voz desde el segundo 216,
+    // subiendo el volumen poco a poco.
+    fundirYEntrarConVoz(216, () => {
+        setTimeout(()=>bfLinea1.classList.add("visible"), 200);
+        setTimeout(()=>bfLinea2.classList.add("visible"), 1600);
+        setTimeout(()=>bfEmoji.classList.add("visible"), 2900);
+        setTimeout(()=>bfLinea3.classList.add("visible"), 3700);
+        setTimeout(()=>bfCorazon.classList.add("visible"), 4900);
+    });
+
     try{ localStorage.setItem("besoFinalVisto","1"); }catch(e){}
 }
 function cerrarBesoFinal(){
