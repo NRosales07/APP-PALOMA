@@ -774,8 +774,14 @@ function activarAuroras(){
     }
 
     function ajustar(){
-        ancho = canvas.width = window.innerWidth;
-        alto = canvas.height = window.innerHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 3);
+        ancho = window.innerWidth;
+        alto = window.innerHeight;
+        canvas.width = ancho * dpr;
+        canvas.height = alto * dpr;
+        canvas.style.width = ancho + "px";
+        canvas.style.height = alto + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         crearEstrellas();
     }
 
@@ -823,8 +829,14 @@ function activarAuroras(){
     ];
 
     function resize(){
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 3);
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width = W + "px";
+        canvas.style.height = H + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     function dibujar(){
@@ -972,13 +984,19 @@ function activarMomento(){
     momentoDiv.classList.add("activo");
 
     // Resize canvas partículas
-    momentoCanvas.width = window.innerWidth;
-    momentoCanvas.height = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 3);
+    const mW = window.innerWidth;
+    const mH = window.innerHeight;
+    momentoCanvas.width = mW * dpr;
+    momentoCanvas.height = mH * dpr;
+    momentoCanvas.style.width = mW + "px";
+    momentoCanvas.style.height = mH + "px";
+    mCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     // Partículas de luz
     const particulas = Array.from({length:60}, () => ({
-        x: Math.random()*momentoCanvas.width,
-        y: Math.random()*momentoCanvas.height,
+        x: Math.random()*mW,
+        y: Math.random()*mH,
         vx: (Math.random()-.5)*0.4,
         vy: (Math.random()-.5)*0.4,
         r: Math.random()*2+0.5,
@@ -990,14 +1008,14 @@ function activarMomento(){
     let mT = 0;
     function dibujarMomento(){
         if (!momentoDiv.classList.contains("activo")) return;
-        mCtx.clearRect(0,0,momentoCanvas.width,momentoCanvas.height);
+        mCtx.clearRect(0,0,mW,mH);
         mT++;
         particulas.forEach(p=>{
             p.x+=p.vx; p.y+=p.vy;
             p.a+=p.va;
             if(p.a<0.05||p.a>0.85) p.va*=-1;
-            if(p.x<0||p.x>momentoCanvas.width) p.vx*=-1;
-            if(p.y<0||p.y>momentoCanvas.height) p.vy*=-1;
+            if(p.x<0||p.x>mW) p.vx*=-1;
+            if(p.y<0||p.y>mH) p.vy*=-1;
             mCtx.beginPath();
             mCtx.arc(p.x,p.y,p.r+Math.sin(mT*.04+p.a*10)*.5,0,Math.PI*2);
             mCtx.fillStyle=p.color+p.a+")";
@@ -1054,12 +1072,18 @@ function activarMomento2(){
     momento2Activado = true;
     momento2Div.classList.add("activo");
 
-    m2Canvas.width  = window.innerWidth;
-    m2Canvas.height = window.innerHeight;
+    const dpr2 = Math.min(window.devicePixelRatio || 1, 3);
+    const m2W = window.innerWidth;
+    const m2H = window.innerHeight;
+    m2Canvas.width  = m2W * dpr2;
+    m2Canvas.height = m2H * dpr2;
+    m2Canvas.style.width = m2W + "px";
+    m2Canvas.style.height = m2H + "px";
+    m2Ctx.setTransform(dpr2, 0, 0, dpr2, 0, 0);
 
     const particulas = Array.from({length:60}, () => ({
-        x: Math.random()*m2Canvas.width,
-        y: Math.random()*m2Canvas.height,
+        x: Math.random()*m2W,
+        y: Math.random()*m2H,
         vx: (Math.random()-.5)*0.4,
         vy: (Math.random()-.5)*0.4,
         r: Math.random()*2+0.5,
@@ -1071,14 +1095,14 @@ function activarMomento2(){
     let mT = 0;
     function dibujarM2(){
         if (!momento2Div.classList.contains("activo")) return;
-        m2Ctx.clearRect(0,0,m2Canvas.width,m2Canvas.height);
+        m2Ctx.clearRect(0,0,m2W,m2H);
         mT++;
         particulas.forEach(p=>{
             p.x+=p.vx; p.y+=p.vy;
             p.a+=p.va;
             if(p.a<0.05||p.a>0.85) p.va*=-1;
-            if(p.x<0||p.x>m2Canvas.width) p.vx*=-1;
-            if(p.y<0||p.y>m2Canvas.height) p.vy*=-1;
+            if(p.x<0||p.x>m2W) p.vx*=-1;
+            if(p.y<0||p.y>m2H) p.vy*=-1;
             m2Ctx.beginPath();
             m2Ctx.arc(p.x,p.y,p.r+Math.sin(mT*.04+p.a*10)*.5,0,Math.PI*2);
             m2Ctx.fillStyle=p.color+p.a+")";
