@@ -6,13 +6,13 @@
 <meta name="description" content="Un observatorio personal hecho con todo mi corazón para Angie ❤️">
 <meta name="theme-color" content="#0a0e27">
 <meta name="color-scheme" content="dark">
-<title>Para Ti ❤️ — Observatorio de Angie</title>
+<title>Cantares 6:9</title>
 
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Para Angie">
+<meta name="apple-mobile-web-app-title" content="Cantares 6:9">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
 
@@ -146,20 +146,20 @@ img{-webkit-user-drag:none;user-select:none;}
 /* Hero overlay dentro del universo */
 #heroOverlay{
     position:absolute;
-    top:calc(var(--safe-top) + 32px);
+    top:calc(var(--safe-top) + 14px);
     left:0;right:0;
-    display:flex;flex-direction:column;align-items:center;gap:10px;
+    display:flex;flex-direction:column;align-items:center;gap:6px;
     pointer-events:none;z-index:2;
     animation:apareceTexto 1.2s .5s var(--ease) both;
 }
 .hero-script-top{
     font-family:var(--font-script);
-    font-size:1.1rem;
+    font-size:.95rem;
     color:var(--color-accent);
     opacity:.85;
 }
 #heroOverlay h1{
-    font-size:clamp(2rem,9vw,2.8rem);
+    font-size:clamp(1.5rem,7vw,2.1rem);
     color:var(--color-glow);
     text-shadow:0 0 30px rgba(255,215,0,.4);
     line-height:1.1;
@@ -167,51 +167,64 @@ img{-webkit-user-drag:none;user-select:none;}
     padding:0 20px;
 }
 
-/* Botón Iniciar */
-#btnIniciar{
-    position:absolute;
-    bottom:calc(var(--safe-bottom) + 38px);
-    left:50%;transform:translateX(-50%);
-    z-index:3;
-    background:linear-gradient(135deg,var(--color-primary),var(--color-primary-light));
-    color:white;border:none;
-    padding:16px 44px;
-    border-radius:40px;
-    cursor:pointer;
-    font-size:1rem;font-weight:500;letter-spacing:.02em;
-    box-shadow:var(--shadow-soft);
-    transition:.3s var(--ease);
-    animation:apareceTexto 1s 1s var(--ease) both;
-}
-#btnIniciar:active{transform:translateX(-50%) scale(.96);}
+/* (Botón Iniciar eliminado: la música ahora arranca al entrar al primer planeta) */
 
-/* Foto portada orbitando */
+/* Foto portada orbitando, centrada debajo del texto "Para Ti" */
 #fotoPortadaWrap{
-    position:absolute;
-    top:calc(var(--safe-top) + 130px);
-    left:50%;
-    width:110px;height:110px;
-    transform:translateX(-50%);
-    z-index:2;
+    position:relative;
+    width:84px;height:84px;
+    margin-top:8px;
     pointer-events:none;
     animation:apareceTexto 1s .3s var(--ease) both;
 }
 #fotoPortadaWrap::before{
-    content:'';position:absolute;inset:-8px;border-radius:50%;
+    content:'';position:absolute;inset:-6px;border-radius:50%;
     background:conic-gradient(from 0deg,var(--color-gold),var(--color-primary-light),var(--color-gold));
     animation:girarAnillo 8s linear infinite;opacity:.8;
 }
 @keyframes girarAnillo{to{transform:rotate(360deg);}}
 #fotoPortada{
-    position:relative;width:110px;height:110px;
+    position:relative;width:84px;height:84px;
     object-fit:cover;border-radius:50%;
-    border:3px solid #0a0e27;display:block;
+    border:2px solid #0a0e27;display:block;
     box-shadow:var(--shadow-soft);
 }
 
 @keyframes apareceTexto{
     from{opacity:0;transform:translateY(16px);}
     to{opacity:1;transform:translateY(0);}
+}
+
+/* Contador en vivo desde el 13/12/25 */
+#contadorWrap{
+    margin-top:14px;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    animation:apareceTexto 1s .6s var(--ease) both;
+}
+#contadorLabel{
+    font-family:var(--font-script);
+    font-size:.9rem;
+    color:var(--color-accent);
+    opacity:.9;
+}
+#contadorNumeros{
+    display:flex;align-items:flex-end;gap:10px;
+}
+.contador-bloque{
+    display:flex;flex-direction:column;align-items:center;
+    min-width:38px;
+}
+.contador-bloque span{
+    font-family:var(--font-display);font-weight:700;
+    font-size:clamp(1.1rem,5vw,1.45rem);
+    color:var(--color-glow);
+    text-shadow:0 0 16px rgba(255,215,0,.35);
+    line-height:1;
+    font-variant-numeric:tabular-nums;
+}
+.contador-bloque small{
+    font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--color-text-soft);margin-top:3px;
 }
 
 /* Hint de tap en planetas */
@@ -440,14 +453,65 @@ p{line-height:1.85;max-width:480px;font-weight:300;}
     color:var(--color-text);min-width:44px;min-height:44px;justify-content:center;
 }
 .tema-estrella-punto{
-    font-size:1.5rem;color:var(--color-gold);
-    text-shadow:0 0 12px rgba(255,209,102,.75),0 0 26px rgba(255,209,102,.35);
+    font-size:1.9rem;color:var(--color-gold);
+    text-shadow:0 0 14px rgba(255,209,102,.8),0 0 30px rgba(255,209,102,.4);
     transition:.3s var(--ease);animation:titilar 3.4s ease-in-out infinite;
 }
 .tema-estrella:nth-child(odd) .tema-estrella-punto{animation-delay:-1.2s;}
 @keyframes titilar{0%,100%{opacity:.7;transform:scale(1);}50%{opacity:1;transform:scale(1.18);}}
-.tema-estrella-label{font-family:var(--font-display);font-size:.68rem;font-style:italic;white-space:nowrap;color:var(--color-text-soft);}
+.tema-estrella-label{font-family:var(--font-display);font-size:.82rem;font-style:italic;white-space:nowrap;color:var(--color-text-soft);}
 .tema-estrella:active .tema-estrella-punto{transform:scale(1.4);color:#fff;}
+
+/* Estrella ya explorada: queda marcada con un brillo propio, como una constelación que se va completando */
+.tema-estrella.visitado .tema-estrella-punto{
+    color:#fff;
+    text-shadow:0 0 10px rgba(255,255,255,.9),0 0 26px rgba(255,122,162,.65),0 0 42px rgba(255,209,102,.4);
+    animation:titilarVisitado 2.2s ease-in-out infinite;
+}
+@keyframes titilarVisitado{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.tema-estrella.visitado .tema-estrella-label{color:var(--color-text);}
+.tema-estrella.visitado .tema-estrella-label::after{content:" ✓";color:var(--color-gold);}
+.constelacion-lineas polyline.completa{stroke:rgba(255,209,102,.5);stroke-dasharray:none;}
+
+/* Estrella todavía no le toca: se ve apagada, invita a descubrir las anteriores primero */
+.tema-estrella.bloqueada .tema-estrella-punto{
+    opacity:.3;color:#7c7790;text-shadow:none;animation:none;
+}
+.tema-estrella.bloqueada .tema-estrella-label{opacity:.35;}
+
+/* La próxima estrella a descubrir: brilla más fuerte para guiarla */
+.tema-estrella.siguiente .tema-estrella-punto{
+    animation:titilarSiguiente 1.8s ease-in-out infinite;
+}
+@keyframes titilarSiguiente{0%,100%{opacity:.85;transform:scale(1);}50%{opacity:1;transform:scale(1.3);}}
+
+/* Pista de "todavía no" al tocar una estrella bloqueada */
+.tema-estrella.sacudida{animation:sacudidaSuave .4s ease;}
+@keyframes sacudidaSuave{
+    0%,100%{transform:translate(-50%,-50%);}
+    25%{transform:translate(calc(-50% - 4px),-50%);}
+    75%{transform:translate(calc(-50% + 4px),-50%);}
+}
+
+/* ============ MOMENTO FINAL: AL COMPLETAR LA CONSTELACIÓN CON "BESOS" ============ */
+#besoFinal{
+    position:fixed;inset:0;z-index:2500;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:rgba(8,3,12,0);
+    pointer-events:none;
+    transition:background 2s ease;
+}
+#besoFinal.activo{background:rgba(8,3,12,.97);pointer-events:auto;}
+.beso-final-emoji{
+    font-size:4.2rem;margin:14px 0;
+    opacity:0;transform:scale(.5);
+    transition:opacity 1.1s var(--ease),transform 1.1s var(--ease);
+    filter:drop-shadow(0 0 30px rgba(255,122,162,.75));
+}
+.beso-final-emoji.visible{
+    opacity:1;transform:scale(1);
+    animation:latido 1.5s 1.1s ease-in-out infinite;
+}
 footer{padding:40px 20px calc(60px + var(--safe-bottom));text-align:center;color:var(--color-text-soft);font-size:.82rem;letter-spacing:.03em;}
 footer .footer-heart{color:var(--color-primary-light);font-size:1rem;display:block;margin-bottom:8px;}
 
@@ -465,7 +529,7 @@ footer .footer-heart{color:var(--color-primary-light);font-size:1rem;display:blo
 
 /* ============ MOMENTO ESPECIAL CANCIÓN ============ */
 #momentoCancion{
-    position:fixed;inset:0;z-index:200;
+    position:fixed;inset:0;z-index:2000;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     background:rgba(4,4,12,0);
     pointer-events:none;
@@ -505,7 +569,7 @@ footer .footer-heart{color:var(--color-primary-light);font-size:1rem;display:blo
 
 /* Segundo momento — mismos estilos que el primero */
 #momentoCancion2{
-    position:fixed;inset:0;z-index:201;
+    position:fixed;inset:0;z-index:2001;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     background:rgba(4,4,12,0);
     pointer-events:none;
@@ -644,19 +708,23 @@ footer .footer-heart{color:var(--color-primary-light);font-size:1rem;display:blo
 <div id="universoScreen">
     <canvas id="universoCanvas" aria-label="Universo explorable con secciones"></canvas>
 
-    <!-- Foto portada -->
-    <div id="fotoPortadaWrap">
-        <img src="img/beso4.jpeg" id="fotoPortada" alt="Angie">
-    </div>
-
-    <!-- Texto hero -->
+    <!-- Texto hero + foto -->
     <div id="heroOverlay">
         <div class="hero-script-top">Para el Amor de mi Vida...</div>
         <h1>Para Ti ❤️</h1>
+        <div id="fotoPortadaWrap">
+            <img src="img/beso4.jpeg" id="fotoPortada" alt="Angie">
+        </div>
+        <div id="contadorWrap" aria-live="off">
+            <div id="contadorLabel">Desde que todo empezó a cambiar</div>
+            <div id="contadorNumeros">
+                <div class="contador-bloque"><span id="cDias">0</span><small>días</small></div>
+                <div class="contador-bloque"><span id="cHoras">0</span><small>hrs</small></div>
+                <div class="contador-bloque"><span id="cMin">0</span><small>min</small></div>
+                <div class="contador-bloque"><span id="cSeg">0</span><small>seg</small></div>
+            </div>
+        </div>
     </div>
-
-    <!-- Botón Iniciar -->
-    <button id="btnIniciar">Iniciar ❤️</button>
 </div>
 
 <!-- ============ PANEL DE SECCIÓN ============ -->
@@ -692,6 +760,17 @@ footer .footer-heart{color:var(--color-primary-light);font-size:1rem;display:blo
         <div class="momento-linea linea-2" id="m2Linea4">Temoroso y sin aliento</div>
         <div class="momento-linea linea-1" id="m2Linea5">Aún te seguiré mirando</div>
         <div class="momento-corazon" id="m2Corazon" role="button" aria-label="Continuar">❤️</div>
+    </div>
+</div>
+
+<!-- ============ MOMENTO FINAL: AL DESCUBRIR TODAS LAS ESTRELLAS, TERMINANDO EN "BESOS" ============ -->
+<div id="besoFinal">
+    <div class="momento-letras">
+        <div class="momento-linea linea-1" id="bfLinea1">Encontró cada estrella de nuestra constelación...</div>
+        <div class="momento-linea linea-2" id="bfLinea2">Y como toda buena historia bajo este cielo</div>
+        <div class="beso-final-emoji" id="bfEmoji">💋</div>
+        <div class="momento-linea linea-2" id="bfLinea3" style="font-size:1.05rem;">esto solo puede terminar de una forma...</div>
+        <div class="momento-corazon" id="bfCorazon" role="button" aria-label="Cerrar">😘</div>
     </div>
 </div>
 
@@ -767,7 +846,7 @@ function activarAuroras(){
         const n = Math.floor((ancho * alto) / 5200);
         estrellas = Array.from({length:n}, () => ({
             x: Math.random()*ancho, y: Math.random()*alto,
-            radio: Math.random()*1.4+0.4, fase: Math.random()*Math.PI*2,
+            radio: Math.random()*1.9+0.6, fase: Math.random()*Math.PI*2,
             vel: Math.random()*0.015+0.006, prof: Math.random()*0.6+0.2,
             color: paleta[Math.floor(Math.random()*paleta.length)]
         }));
@@ -820,12 +899,12 @@ function activarAuroras(){
     let W, H, t = 0;
 
     const planetas = [
-        { id:"historia",  label:"🌹 Nuestra Historia",  emoji:"🌹", color:"#ffd166", glow:"rgba(255,209,102,0.55)", x:.22, y:.40, r:26 },
-        { id:"messier",   label:"🔭 Mi Catálogo",       emoji:"🔭", color:"#c9986a", glow:"rgba(201,152,106,0.5)",  x:.78, y:.38, r:22 },
-        { id:"carta",     label:"💌 Carta para Ti",     emoji:"💌", color:"#a78bfa", glow:"rgba(167,139,250,0.5)",  x:.28, y:.62, r:30 },
-        { id:"idonea",    label:"💞 Mi Idónea",         emoji:"💞", color:"#ff7aa2", glow:"rgba(255,122,162,0.5)",  x:.72, y:.60, r:24 },
-        { id:"secreto",   label:"🔒 Un Secreto",        emoji:"🔒", color:"#5dcaa5", glow:"rgba(93,202,165,0.5)",   x:.50, y:.76, r:20 },
-        { id:"recuerdos", label:"📸 Recuerdos",         emoji:"📸", color:"#60a5fa", glow:"rgba(96,165,250,0.45)",  x:.50, y:.90, r:22 },
+        { id:"historia",  label:"🌹 Nuestra Historia",  emoji:"🌹", color:"#ffd166", glow:"rgba(255,209,102,0.55)", x:.22, y:.40, r:26, presion:0 },
+        { id:"messier",   label:"🔭 Mi Catálogo",       emoji:"🔭", color:"#c9986a", glow:"rgba(201,152,106,0.5)",  x:.78, y:.38, r:22, presion:0 },
+        { id:"carta",     label:"💌 Carta para Ti",     emoji:"💌", color:"#a78bfa", glow:"rgba(167,139,250,0.5)",  x:.28, y:.62, r:30, presion:0 },
+        { id:"idonea",    label:"💞 Mi Idónea",         emoji:"💞", color:"#ff7aa2", glow:"rgba(255,122,162,0.5)",  x:.72, y:.60, r:24, presion:0 },
+        { id:"secreto",   label:"🔒 Un Secreto",        emoji:"🔒", color:"#5dcaa5", glow:"rgba(93,202,165,0.5)",   x:.50, y:.76, r:20, presion:0 },
+        { id:"recuerdos", label:"📸 Recuerdos",         emoji:"📸", color:"#60a5fa", glow:"rgba(96,165,250,0.45)",  x:.50, y:.90, r:22, presion:0 },
     ];
 
     function resize(){
@@ -847,7 +926,9 @@ function activarAuroras(){
             const px = p.x * W;
             const py = p.y * H;
             const pulse = Math.sin(t * 0.7 + i * 1.1) * 3;
-            const glowR = p.r + 18 + pulse;
+            p.presion += (0 - p.presion) * 0.18; // decae suavemente tras soltar
+            const boost = p.presion; // 0 = en reposo, 1 = recién presionado
+            const glowR = p.r + 18 + pulse + boost*14;
 
             // Anillo orbital sutil
             ctx.beginPath();
@@ -856,20 +937,23 @@ function activarAuroras(){
             ctx.lineWidth = 0.8;
             ctx.stroke();
 
-            // Glow exterior
+            // Glow exterior (se intensifica al presionar)
             const gg = ctx.createRadialGradient(px,py,p.r*0.3,px,py,glowR);
             gg.addColorStop(0, p.color+"cc");
             gg.addColorStop(0.5, p.glow);
             gg.addColorStop(1, "transparent");
             ctx.beginPath(); ctx.arc(px,py,glowR,0,Math.PI*2);
+            ctx.globalAlpha = 1 + boost*0.4;
             ctx.fillStyle = gg; ctx.fill();
+            ctx.globalAlpha = 1;
 
-            // Cuerpo planeta
-            const bg = ctx.createRadialGradient(px-p.r*.3,py-p.r*.3,p.r*.05,px,py,p.r+pulse*.4);
+            // Cuerpo planeta (crece levemente al presionar)
+            const rEfectivo = p.r + pulse*.4 + boost*4;
+            const bg = ctx.createRadialGradient(px-p.r*.3,py-p.r*.3,p.r*.05,px,py,rEfectivo);
             bg.addColorStop(0,"#fff");
             bg.addColorStop(0.25,p.color+"ff");
             bg.addColorStop(1,p.color+"88");
-            ctx.beginPath(); ctx.arc(px,py,p.r+pulse*.4,0,Math.PI*2);
+            ctx.beginPath(); ctx.arc(px,py,rEfectivo,0,Math.PI*2);
             ctx.fillStyle=bg; ctx.fill();
 
             // Brillo
@@ -879,9 +963,9 @@ function activarAuroras(){
             ctx.beginPath(); ctx.arc(px,py,p.r,0,Math.PI*2);
             ctx.fillStyle=sh; ctx.fill();
 
-            // Emoji label
+            // Emoji label (rebota levemente al presionar)
             ctx.save();
-            ctx.font = `${Math.round(p.r*0.72)}px serif`;
+            ctx.font = `${Math.round((p.r+boost*2)*0.72)}px serif`;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillText(p.emoji, px, py);
@@ -889,11 +973,11 @@ function activarAuroras(){
 
             // Label texto debajo
             ctx.save();
-            ctx.font = "500 11px 'Jost', sans-serif";
+            ctx.font = "500 12px 'Jost', sans-serif";
             ctx.textAlign = "center";
-            ctx.fillStyle = "rgba(255,255,255,0.75)";
-            ctx.shadowColor = "rgba(0,0,0,0.8)";
-            ctx.shadowBlur = 6;
+            ctx.fillStyle = "rgba(255,255,255,0.9)";
+            ctx.shadowColor = "rgba(0,0,0,0.85)";
+            ctx.shadowBlur = 7;
             ctx.fillText(p.label, px, py + p.r + 14 + pulse*.2);
             ctx.restore();
         });
@@ -905,18 +989,54 @@ function activarAuroras(){
     resize();
     dibujar();
 
-    // Tap en planetas
-    canvas.addEventListener("click", e => {
+    function planetaEnPunto(clientX, clientY){
         const rect = canvas.getBoundingClientRect();
-        const mx = (e.clientX - rect.left) * (W / rect.width);
-        const my = (e.clientY - rect.top) * (H / rect.height);
+        const mx = (clientX - rect.left) * (W / rect.width);
+        const my = (clientY - rect.top) * (H / rect.height);
+        let masCercano = null, distMin = Infinity;
         planetas.forEach(p => {
             const dist = Math.hypot(mx - p.x*W, my - p.y*H);
-            if (dist < p.r + 40) abrirSeccion(p.id, p.label);
+            if (dist < p.r + 40 && dist < distMin){ distMin = dist; masCercano = p; }
         });
+        return masCercano;
+    }
+
+    // Feedback táctil inmediato al tocar/clickear
+    canvas.addEventListener("pointerdown", e => {
+        const p = planetaEnPunto(e.clientX, e.clientY);
+        if (p) p.presion = 1;
+    }, {passive:true});
+
+    // Tap en planetas (abre la sección)
+    canvas.addEventListener("click", e => {
+        const p = planetaEnPunto(e.clientX, e.clientY);
+        if (p) abrirSeccion(p.id, p.label);
     });
 
     window.universoResize = resize;
+})();
+
+/* ============ CONTADOR EN VIVO ============ */
+(function(){
+    // 13 de diciembre de 2025, 19:00 — el día de la boda de Karina, donde todo empezó a cambiar
+    const FECHA_INICIO = new Date(2025, 11, 13, 19, 0, 0);
+    const cDias = document.getElementById("cDias");
+    const cHoras = document.getElementById("cHoras");
+    const cMin = document.getElementById("cMin");
+    const cSeg = document.getElementById("cSeg");
+    if (!cDias) return;
+
+    function actualizar(){
+        const diff = Date.now() - FECHA_INICIO.getTime();
+        if (diff < 0) return; // por si alguien abre la página antes de la fecha
+        const seg = Math.floor(diff / 1000);
+        cDias.textContent = Math.floor(seg / 86400);
+        cHoras.textContent = String(Math.floor((seg % 86400) / 3600)).padStart(2,"0");
+        cMin.textContent = String(Math.floor((seg % 3600) / 60)).padStart(2,"0");
+        cSeg.textContent = String(seg % 60).padStart(2,"0");
+    }
+    actualizar();
+    setInterval(actualizar, 1000);
 })();
 
 /* ============ MÚSICA + INICIAR ============ */
@@ -934,7 +1054,7 @@ function iniciarMusica(){
     vigilarMomentoCancion();
 }
 
-document.getElementById("btnIniciar").addEventListener("click", iniciarMusica);
+// La música ahora se inicia automáticamente al abrir el primer planeta (ver abrirSeccion)
 
 musicToggle.addEventListener("click", () => {
     if (!musicToggle.classList.contains("visible")) musicToggle.classList.add("visible");
@@ -1166,6 +1286,7 @@ const SECCIONES = {
 function abrirSeccion(id){
     const sec = SECCIONES[id];
     if (!sec) return;
+    if (!musicaIniciada) iniciarMusica();
     panelTitulo.textContent = sec.titulo;
     panelContenido.innerHTML = "";
     sec.render(panelContenido);
@@ -1363,6 +1484,7 @@ function renderRecuerdos(c){
     <div class="panel-seccion">
         <span class="eyebrow">Nuestra galería</span>
         <p class="subtitulo">Cada estrella guarda un grupo de recuerdos. Toque una para revelarlos ❤️</p>
+        <p class="subtitulo" id="constProgreso" style="margin-top:-18px;font-size:.78rem;color:var(--color-gold);"></p>
         <div class="nebulosa-mapa">
             <svg class="constelacion-lineas" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                 <polyline points="50,12 18,26 82,24 50,12"/>
@@ -1407,57 +1529,57 @@ const temas = [
         {foto:"img/amor.jpeg",texto:"Gracias por llegar a mi vida cuando menos lo esperaba, de todas las fotos que nos hemos tomado, esta es mi favorita Amor ❤️"},
     ]},
     { id:"boda", nombre:"La boda de Karina", emoji:"💍", fotos:[
-        {foto:"img/boda1.jpeg",texto:"No entiendo como no pude aprovechar esa ocasión para besar su hermosa boquita bb ❤️"},
-        {foto:"img/boda2.jpeg",texto:"Lo mejor de nuestra historia todavía está por escribirse bbecita..."},
-        {foto:"img/boda3.jpeg",texto:"Lindo ese corazón ❤️"},
+        {foto:"img/boda1.jpeg",texto:"El momento donde todo empezó, Dios quizo que nos sentáramos juntos como para que supieramos que nos vamos a casar, y nos vemos tan lindos juntos Amor ❤️"},
+        {foto:"img/boda2.jpeg",texto:"Me parece tan tierna su carita bbcita, que hermosa y linda que es..."},
+        {foto:"img/boda3.jpeg",texto:"Me hace gracia esa foto, pero es por la mirada de Ihsahn jajaja. Pero más allá de eso salimos bien siempre ❤️"},
     ]},
-    { id:"cerca", nombre:"Tan cerca de usted", emoji:"🥰", fotos:[
-        {foto:"img/caraangie1.jpeg",texto:"Contigo aprendí que los momentos más simples pueden convertirse en los más especiales ✨"},
-        {foto:"img/caraangie2.jpeg",texto:"Cada vez que veo esta foto, me recuerda lo afortunado que soy de tener tu mano en la mía 🌹"},
-        {foto:"img/caraangie3.jpeg",texto:"Cada recuerdo con usted tiene algo que lo hace único 🌹"},
-        {foto:"img/caraangie4.jpeg",texto:"Esta es mi segunda foto favorita, tan linda que se ve ahí usted 💕"},
-        {foto:"img/caraangie5.jpeg",texto:"Me encanta besar su mejilla corazón ❤️"},
-        {foto:"img/caraangie6.jpeg",texto:"Me encanta estar tan cerca de usted ❤️"},
-        {foto:"img/caraangie7.jpeg",texto:"Amo tener mi cabeza recostada en su hombro ❤️"},
+    { id:"cerca", nombre:"Su Carita linda", emoji:"🥰", fotos:[
+        {foto:"img/caraangie1.jpeg",texto:"Me encanta verla, se ve super encantadora en esa foto ✨"},
+        {foto:"img/caraangie2.jpeg",texto:"Me gusta toda su carita, pero es inevitable no ver esa boquita tan lindaaaaaaa, me enamora solo con verla!!! 🥰"},
+        {foto:"img/caraangie3.jpeg",texto:"En esta foto solo le puedo decir: QUE PRECIOSA SE VE MI MAMACITAAAAAA!!!!"},
+        {foto:"img/caraangie4.jpeg",texto:"De verdad que no importa la foto, en todas se ve bella 💕"},
+        {foto:"img/caraangie5.jpeg",texto:"Que tierna que sale en esa foto mi amooooor ❤️"},
+        {foto:"img/caraangie6.jpeg",texto:"Me encanta ver lo linda que se arregla para ir a la casa del Señor para adorarle ❤️"},
+        {foto:"img/caraangie7.jpeg",texto:"Amo que usted se tome fotos y me las mande ❤️"},
     ]},
     { id:"ternura", nombre:"Momentos tiernos", emoji:"🌷", fotos:[
-        {foto:"img/tiernaangie.jpeg",texto:"Tan linda que es usted con lentes, Cielito lindo"},
-        {foto:"img/tiernaangie1.jpeg",texto:"Bello ver esa boquita tan resaltada con ese labial tan lindo, me encanta esa foto porque se ve tan linda y tan feliz ❤️"},
-        {foto:"img/tiernaangie2.jpeg",texto:"La primer foto que nos tomamos juntos, awww, que ternuraaaa"},
-        {foto:"img/tiernaangie3.jpeg",texto:"No importa la foto, o en que momento se la tome, siempre sale bellaaaaaaa"},
-        {foto:"img/tiernaangie4.jpeg",texto:"Mi niña preciosa como te AMOOOOOOOO"},
-        {foto:"img/tiernaangie5.jpeg",texto:"Preciosa tomandose fotos y mandandomelas a mi"},
-        {foto:"img/tiernaangie6.jpeg",texto:"Boquita tan linda, con forma de corazon, y lo mejor es que es solo para miiii"},
-        {foto:"img/tiernaangie7.jpeg",texto:"Se ve tan bella arreglada para ir alabar a nuestro Dios"},
+        {foto:"img/tiernaangie.jpeg",texto:"Tan linda que es usted con lentes, Cielito lindo, esta es literalmente la foto mas tierna que me ha mandado, y literalmente esa foto me enciende, me enamora de usted 😍😍😍😍😍"},
+        {foto:"img/tiernaangie1.jpeg",texto:"No importa si se toma fotos estan doarreglada para ir a algun lugar o no, en todo tiempo se ve divinaaa, y tan lindos y adorables esos cachetitossss ❤️"},
+        {foto:"img/tiernaangie2.jpeg",texto:"Que ternuraaaa mi AMOOOOOR, en esa foto me la imagino como un pandita a quien quiero abrazar para siempreeee!!!"},
+        {foto:"img/tiernaangie3.jpeg",texto:"De sus fotos mandandome piquitos esta es la mejor, esta foto solo la puedo definir como: Chulada, boquita tan linda la suyaaaa, y lo mejor es que es solo para mi 😍😍"},
+        {foto:"img/tiernaangie4.jpeg",texto:"Mi niña preciosa como te AMOOOOOOOO 😍"},
+        {foto:"img/tiernaangie5.jpeg",texto:"Aunque le tomen fotos sin darse cuenta se ve guapetonaaa"},
+        {foto:"img/tiernaangie6.jpeg",texto:"Tierna esa foto de usted haciendo baleadas amooor"},
+        {foto:"img/tiernaangie7.jpeg",texto:"Y una de mis favoritas, se ve tan tierna y adorable mientras adora a nuestro Dios, y eso es de lo mas lindo que usted tiene, que adora al Dios vivo! 😍"},
     ]},
     { id:"risas", nombre:"Risas y manitas", emoji:"😄", fotos:[
-        {foto:"img/manos.jpeg",texto:"Que lindura la que sale ahi Dios mioooooo"},
-        {foto:"img/cora.jpeg",texto:"Verdaderamente somos unos loquillo jajaj ❤️"},
-        {foto:"img/dedos.jpeg",texto:"Aun en fotos sin que se de cuenta sale bella, sonrisa tan linda que me encanta!!!!!"},
-        {foto:"img/risas1.jpeg",texto:"Cuando se ríe así, de verdad, sin filtros, me parece la persona más bonita del universo entero. Y no exagero ni un poco ❤️"},
-        {foto:"img/risas2.jpeg",texto:"Todos los colores le quedan bien a mi bb..."},
+        {foto:"img/manos.jpeg",texto:"Que foto tan linda, porque de alguna manera estamos diciendo: El centro de nuestra relación es nuestro Dios"},
+        {foto:"img/cora.jpeg",texto:"Corazon lindo ❤️"},
+        {foto:"img/dedos.jpeg",texto:"Linda su manita tan pequeña bbecita, me encanta verlaaaa "},
+        {foto:"img/risas1.jpeg",texto:"Nos salió mal una foto pero se nos guardó un momento de risas lindo jaja ❤️"},
+        {foto:"img/risas2.jpeg",texto:"Somos unos loquillos haciendo eso jaja"},
     ]},
     { id:"juntos", nombre:"Juntos", emoji:"💕", fotos:[
-        {foto:"img/caraacara.jpeg",texto:"Cara a cara, así como dice la canción, y me doy cuenta que no cambiaría ese momento por nada del mundo ❤️"},
+        {foto:"img/caraacara.jpeg",texto:"Cara a cara, así como dice la canción, y me doy cuenta que no cambiaría ese momento por nada del mundo, lo mas hermoso es vernos el uno al otro ❤️"},
         {foto:"img/juntos.jpeg",texto:"Juntos. Que palabra tan pequeña para contener algo tan grande como lo que siento cuando estoy a su lado."},
         {foto:"img/juntos1.jpeg",texto:"Cada foto que nos tomamos juntos se convierte automáticamente en mi favorita, y esta no es la excepción."},
-        {foto:"img/juntos2.jpeg",texto:"Si pudiera elegir en dónde estar el resto de mi vida, elegiría exactamente aquí: a su lado, siempre."},
+        {foto:"img/juntos2.jpeg",texto:"Si pudiera elegir en dónde estar el resto de mi vida, elegiría exactamente aquí: a su lado, siempre, en su hombro."},
         {foto:"img/juntos3.jpeg",texto:"No sé cuántas fotos más nos vamos a tomar juntos, pero sé que cada una va a tener algo especial: usted."},
         {foto:"img/juntos4.jpeg",texto:"Dos personas que Dios unió sin que ninguna de las dos lo esperara. Eso somos nosotros, y eso me parece lo más bello del mundo."},
         {foto:"img/juntos5.jpeg",texto:"Me encanta que existan fotos como esta, porque cuando pasen los años voy a poder mirarla y decir: ahí empezó todo ❤️"},
     ]},
     { id:"mejillas", nombre:"Mejillas", emoji:"😊", fotos:[
-        {foto:"img/mejilla1.jpeg",texto:"¿Sabe cuánto me gusta esa mejilla? Infinitamente. Podría estar mirándola toda la vida y no me cansaría."},
-        {foto:"img/mejilla2.jpeg",texto:"Esa sonrisa que se esconde en su mejilla es mi lugar favorito en el mundo entero."},
+        {foto:"img/mejilla1.jpeg",texto:"Me encanta que me de besitos en la cara mi Amor, es lo de lo mas bello que hay"},
+        {foto:"img/mejilla2.jpeg",texto:"Me encanta esa foto, es mi segunda foto favorita de nosotros"},
         {foto:"img/mejilla3.jpeg",texto:"Hay algo mágico en esa mejilla que no sé explicar con palabras, pero sí con esto: la amo con todo mi corazón."},
         {foto:"img/mejilla4.jpeg",texto:"Cada vez que la veo así, con esa carita tan linda, me pregunto cómo fui tan afortunado de que Dios me la pusiera en el camino."},
     ]},
     { id:"besos", nombre:"Besos", emoji:"💋", fotos:[
-        {foto:"img/beso.jpeg",texto:"El primer beso que nos dimos cambió todo para siempre. Y lo mejor es que fue el inicio de muchos más ❤️"},
-        {foto:"img/beso1.jpeg",texto:"Cada beso suyo es un recordatorio de que Dios es muy bueno conmigo, porque me dio a la persona más especial del mundo."},
+        {foto:"img/beso.jpeg",texto:"El primer beso que nos dimos cambió todo para siempre, porque por fin pudimos hacer lo que tanto deseabamos y anhelabamos. Y lo mejor es que fue el inicio de muchos más ❤️"},
+        {foto:"img/beso1.jpeg",texto:"Cada beso suyo es un recordatorio de que Dios es muy bueno conmigo, porque me dio a la persona más especial del mundo. además, esa foto se ve espectacular"},
         {foto:"img/beso2.jpeg",texto:"No hay forma de describir lo que siento cuando me da un beso. Solo sé que el tiempo se detiene y todo lo demás desaparece."},
-        {foto:"img/beso3.jpeg",texto:"Sus besos saben a todo lo que siempre quise sin saber que lo quería. Gracias por dármelos, mi amor."},
-        {foto:"img/beso4.jpeg",texto:"Esta foto me recuerda que hay cosas en la vida que no tienen precio, y sus besos son definitivamente una de ellas ❤️"},
+        {foto:"img/beso3.jpeg",texto:"Sus besos saben a todo lo que siempre quise sin saber que los quería. Gracias por dármelos, mi amor."},
+        {foto:"img/beso4.jpeg",texto:"Esta foto me recuerda que hay cosas en la vida que no tienen precio, y poder ser el unico quien la pueda besar es lo mejor que hay ❤️"},
         {foto:"img/beso5.jpeg",texto:"El 23 de junio del 2026 es y será siempre una de las fechas más bonitas de mi vida. Gracias por ese día, Angie."},
     ]},
 ];
@@ -1473,7 +1595,25 @@ const constClose = document.getElementById("constModalClose");
 const constPrev = document.getElementById("constPrevBtn");
 const constNext = document.getElementById("constNextBtn");
 
+let pendienteBesoFinal = false;
+
 function abrirTema(id){
+    const orden = temas.map(t=>t.id);
+    const visitados = obtenerVisitados();
+    const yaVisitada = visitados.includes(id);
+    const siguienteEsperado = orden.find(t => !visitados.includes(t));
+
+    // Si no le toca todavía, no se abre: solo le damos una pista visual de "aún no"
+    if (!yaVisitada && id !== siguienteEsperado){
+        const btn = document.querySelector(`.tema-estrella[data-tema="${id}"]`);
+        if (btn){
+            btn.classList.remove("sacudida");
+            void btn.offsetWidth;
+            btn.classList.add("sacudida");
+        }
+        return;
+    }
+
     temaActivo = temas.find(t=>t.id===id);
     if(!temaActivo) return;
     indiceFoto=0;
@@ -1481,6 +1621,51 @@ function abrirTema(id){
     mostrarFotoTema();
     constModal.classList.add("open");
     constClose.focus();
+    marcarTemaVisitado(id);
+
+    // Si "Besos" era la última que faltaba, preparamos el momento final para cuando cierre la foto
+    if (id === "besos" && orden.every(t => obtenerVisitados().includes(t))){
+        let yaVisto = false;
+        try{ yaVisto = localStorage.getItem("besoFinalVisto") === "1"; }catch(e){}
+        if (!yaVisto) pendienteBesoFinal = true;
+    }
+}
+
+/* Recuerda qué estrellas ya exploró (persiste offline, sigue ahí en su próxima visita) */
+function obtenerVisitados(){
+    try{ return JSON.parse(localStorage.getItem("constelacionVisitados")||"[]"); }
+    catch(e){ return []; }
+}
+function marcarTemaVisitado(id){
+    const visitados = obtenerVisitados();
+    if (!visitados.includes(id)){
+        visitados.push(id);
+        try{ localStorage.setItem("constelacionVisitados", JSON.stringify(visitados)); }catch(e){}
+    }
+    aplicarVisitados();
+}
+function aplicarVisitados(){
+    const visitados = obtenerVisitados();
+    const orden = temas.map(t=>t.id);
+    const siguienteEsperado = orden.find(t => !visitados.includes(t));
+    document.querySelectorAll(".tema-estrella").forEach(el=>{
+        const id = el.dataset.tema;
+        const visitada = visitados.includes(id);
+        el.classList.toggle("visitado", visitada);
+        el.classList.toggle("siguiente", !visitada && id === siguienteEsperado);
+        el.classList.toggle("bloqueada", !visitada && id !== siguienteEsperado);
+    });
+    const totalTemas = orden.length;
+    document.querySelectorAll(".constelacion-lineas polyline").forEach(p=>{
+        p.classList.toggle("completa", totalTemas > 0 && visitados.length === totalTemas);
+    });
+    const progresoEl = document.getElementById("constProgreso");
+    if (progresoEl && totalTemas > 0){
+        const vistos = visitados.filter(id => document.querySelector(`.tema-estrella[data-tema="${id}"]`)).length;
+        progresoEl.textContent = vistos === totalTemas
+            ? "✨ Descubrió toda la constelación"
+            : `${vistos} / ${totalTemas} estrellas descubiertas`;
+    }
 }
 function mostrarFotoTema(){
     if(!temaActivo) return;
@@ -1498,7 +1683,71 @@ function mostrarFotoTema(){
 }
 function siguienteFoto(){ if(!temaActivo) return; indiceFoto=(indiceFoto+1)%temaActivo.fotos.length; mostrarFotoTema(); }
 function anteriorFoto(){ if(!temaActivo) return; indiceFoto=(indiceFoto-1+temaActivo.fotos.length)%temaActivo.fotos.length; mostrarFotoTema(); }
-function cerrarConstModal(){ constModal.classList.remove("open"); temaActivo=null; }
+function cerrarConstModal(){
+    constModal.classList.remove("open");
+    temaActivo=null;
+    if (pendienteBesoFinal){
+        pendienteBesoFinal = false;
+        setTimeout(mostrarBesoFinal, 450);
+    }
+}
+
+/* Momento especial al completar toda la constelación con "Besos" */
+const besoFinalDiv = document.getElementById("besoFinal");
+const bfLinea1 = document.getElementById("bfLinea1");
+const bfLinea2 = document.getElementById("bfLinea2");
+const bfEmoji = document.getElementById("bfEmoji");
+const bfLinea3 = document.getElementById("bfLinea3");
+const bfCorazon = document.getElementById("bfCorazon");
+
+/* Transición suave de la alabanza: baja el volumen, salta al segundo indicado y vuelve a subir */
+function transicionMusicaASegundo(segundoDestino, duracionBajada = 1600, duracionSubida = 2200){
+    if (!musica) return;
+    const volumenOriginal = musica.volume || 1;
+    const pasosBajada = 24;
+    let paso = 0;
+    if (window.__fadeBajadaInterval) clearInterval(window.__fadeBajadaInterval);
+    if (window.__fadeSubidaInterval) clearInterval(window.__fadeSubidaInterval);
+
+    window.__fadeBajadaInterval = setInterval(() => {
+        paso++;
+        musica.volume = Math.max(0, volumenOriginal * (1 - paso / pasosBajada));
+        if (paso >= pasosBajada){
+            clearInterval(window.__fadeBajadaInterval);
+            musica.currentTime = segundoDestino;
+            musica.volume = 0;
+            let pasoSubida = 0;
+            const pasosSubida = 30;
+            window.__fadeSubidaInterval = setInterval(() => {
+                pasoSubida++;
+                musica.volume = Math.min(volumenOriginal, volumenOriginal * (pasoSubida / pasosSubida));
+                if (pasoSubida >= pasosSubida){
+                    clearInterval(window.__fadeSubidaInterval);
+                    musica.volume = volumenOriginal;
+                }
+            }, duracionSubida / pasosSubida);
+        }
+    }, duracionBajada / pasosBajada);
+}
+
+function mostrarBesoFinal(){
+    besoFinalDiv.classList.add("activo");
+    // Justo cuando la pantalla se desvanece para mostrar la indirecta del beso,
+    // la alabanza baja suavemente y vuelve a sonar desde el segundo 216, subiendo de volumen.
+    transicionMusicaASegundo(216);
+    setTimeout(()=>bfLinea1.classList.add("visible"), 500);
+    setTimeout(()=>bfLinea2.classList.add("visible"), 1900);
+    setTimeout(()=>bfEmoji.classList.add("visible"), 3200);
+    setTimeout(()=>bfLinea3.classList.add("visible"), 4000);
+    setTimeout(()=>bfCorazon.classList.add("visible"), 5200);
+    try{ localStorage.setItem("besoFinalVisto","1"); }catch(e){}
+}
+function cerrarBesoFinal(){
+    besoFinalDiv.classList.remove("activo");
+    [bfLinea1,bfLinea2,bfEmoji,bfLinea3,bfCorazon].forEach(el=>el.classList.remove("visible"));
+}
+bfCorazon.addEventListener("click", cerrarBesoFinal);
+bfCorazon.addEventListener("touchend", e=>{ e.preventDefault(); cerrarBesoFinal(); });
 
 constNext.addEventListener("click", siguienteFoto);
 constPrev.addEventListener("click", anteriorFoto);
@@ -1524,6 +1773,7 @@ function initConstModal(){
         document.querySelectorAll(".tema-estrella").forEach(el=>{
             el.addEventListener("click", ()=>abrirTema(el.dataset.tema));
         });
+        aplicarVisitados();
     },100);
 }
 

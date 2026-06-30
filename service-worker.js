@@ -4,7 +4,7 @@
   funcione instalado y sin conexión, como un regalo que vive en su teléfono.
 */
 
-const CACHE_NAME = "para-angie-v2";
+const CACHE_NAME = "cantares-6-9-v4";
 
 const ARCHIVOS_CORE = [
   "./",
