@@ -693,6 +693,11 @@ footer .footer-heart{color:var(--color-primary-light);font-size:1rem;display:blo
 .music-toggle .icon-pause{display:none;}
 .music-toggle.is-playing .icon-play{display:none;}
 .music-toggle.is-playing .icon-pause{display:block;}
+.music-toggle.pulso-suave{animation:pulsoMusica 1.6s ease-in-out 2;}
+@keyframes pulsoMusica{
+    0%,100%{box-shadow:0 0 0 0 rgba(255,209,102,.55);}
+    50%{box-shadow:0 0 0 10px rgba(255,209,102,0);}
+}
 .install-toggle{
     position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(16px + var(--safe-bottom));
     height:44px;padding:0 16px;border-radius:30px;border:1px solid var(--glass-border);
@@ -749,8 +754,8 @@ footer .footer-heart{color:var(--color-primary-light);font-size:1rem;display:blo
 
     <!-- Texto hero + foto -->
     <div id="heroOverlay">
-        <div class="hero-script-top">Para el Amor de mi Vida...</div>
-        <h1>Para mi Angie ❤️</h1>
+        <div class="hero-script-top">Para el Amor de mi Vida... Que siempre estuvo ahí</div>
+        <h1>Para mi Bebecita Angie ❤️</h1>
         <div id="fotoPortadaWrap">
             <img src="img/beso4.jpeg" id="fotoPortada" alt="Angie">
         </div>
@@ -1127,11 +1132,20 @@ musica.addEventListener("ended", () => {
         musica.src = PISTA_INSTRUMENTAL;
         musica.loop = true;
         try {
-            musica.load(); // fuerza a Safari/iOS a reconocer el nuevo source antes de reproducir
+            musica.load(); // deja el archivo listo para reproducir
         } catch(e) {
             console.warn("[musica] Error al cargar instrumental:", e);
         }
-        musica.play().catch((err) => console.warn("[musica] No se pudo reproducir instrumental:", err));
+        // No forzamos play() aquí: iOS bloquea el autoplay cuando no viene
+        // de un toque directo del usuario. En vez de eso, dejamos la
+        // instrumental cargada y pausada, y el botón de música pasa a modo
+        // "reproducir" para que ella lo toque y continúe sin problema.
+        musicToggle.classList.add("visible");
+        musicToggle.classList.remove("is-playing");
+        musicToggle.setAttribute("aria-label","Reproducir música");
+        musicToggle.setAttribute("aria-pressed","false");
+        musicToggle.classList.add("pulso-suave");
+        setTimeout(()=>musicToggle.classList.remove("pulso-suave"), 4000);
     } else {
         musica.currentTime = 0;
         musica.play().catch(()=>{});
