@@ -1995,7 +1995,15 @@ if(!prefersReducedMotion){
 
 /* ============ PWA ============ */
 if("serviceWorker" in navigator){
-    window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}));
+    window.addEventListener("load",()=>{
+        navigator.serviceWorker.register("service-worker.js").then((reg)=>{
+            const pedirCompletarCache = (sw) => {
+                if (sw && navigator.onLine) sw.postMessage({tipo:"completarCache"});
+            };
+            pedirCompletarCache(reg.active);
+            navigator.serviceWorker.ready.then((r)=>pedirCompletarCache(r.active));
+        }).catch(()=>{});
+    });
 }
 const installToggle=document.getElementById("installToggle");
 let deferredInstall=null;

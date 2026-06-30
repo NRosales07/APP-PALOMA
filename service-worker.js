@@ -11,7 +11,7 @@ const ARCHIVOS_CORE = [
   "./index.html",
   "./manifest.json",
   "./Cara.mp3",
-  "./CaraInstrumental.mp3",
+  "./Carainstrumental.mp3",
   "./icons/icon-72.png",
   "./icons/icon-96.png",
   "./icons/icon-128.png",
@@ -98,6 +98,29 @@ self.addEventListener("activate", (event) => {
     )
   );
   self.clients.claim();
+});
+
+/* Auto-reparación: si la página avisa (al abrir con internet) que quiere
+   "completar caché", revisa archivo por archivo y descarga solo los que
+   falten — por ejemplo, si una conexión floja interrumpió la descarga
+   inicial de algún audio o foto. Así no depende de subir una nueva versión
+   cada vez que algo no se alcanzó a cachear. */
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.tipo === "completarCache"){
+    event.waitUntil(
+      caches.open(CACHE_NAME).then(async (cache) => {
+        await Promise.all(
+          ARCHIVOS_CORE.map(async (url) => {
+            const yaEsta = await cache.match(url);
+            if (!yaEsta){
+              try{ await cache.add(url); }
+              catch(err){ console.warn("[SW] Sigue sin poder cachear:", url); }
+            }
+          })
+        );
+      })
+    );
+  }
 });
 
 /* Fetch: cache-first para todo lo del propio sitio (offline-friendly),
